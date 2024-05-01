@@ -1,0 +1,18 @@
+﻿@page "/Api"
+@inject BlazorAuthDemo.Client.Services.ApiService apiService;
+@attribute [StreamRendering]
+
+<PageTitle>Api</PageTitle>
+
+
+@if (_claims == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <p>Claims from API:</p>
+
+    @_claims
+}
+
