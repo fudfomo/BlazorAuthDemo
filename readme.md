@@ -1,3 +1,20 @@
+## HOW TO CALL A SECURED .NET API FROM BLAZOR 8 WITH ENTRA ID 
+
+This is a demonstration of how to use a Blazor 8 Web App to use Entra ID authentication and call a secured .NET Api.
+
+Clicking "Claims" will display the Claims Principle information in the Blazor app.
+
+Clicking "API" will call the api and pass the Entra ID to a endpoint secured with an [Authorize] attribute.  The very that the credentials are flowing to the API, the endpoint will return the Claims Principal to the Blazor app.
+
+## Instructions:
+
+1.  Clone this repo.
+2.  Follow the instructions below to register the api and the client in Azure App Registrations.
+3.  Update the appsettingdevelopment.json files for the client and api with the configurations as descriped in the app registrations section.  Make sure not to let these files get into your repo because they will contain secrets.
+4.  Make sure the Blazor client is configured to call the same port that the api is running on (the api port can be set in properties\launchSettings.json).  
+5.  Set the project properties to launch both api and client apps.
+
+
 ### Register the API (BlazorAuthDemo.Api)
 
 1.  Navigate to the [Azure portal](https://portal.azure.com).
@@ -69,11 +86,13 @@ Indicates token type. This claim is the most accurate way for an API to determin
 
 1.  Store the App Registration values in the appsettings.development.json and for security reasons make sure to not check in this file:
 
+  ~~~
   "AzureAd": {
     "Instance": "https://login.microsoftonline.com/",
     "ClientId": "Client ID from API App Registration",
     "TenantId": "Tenant ID from APO App Registration"
   },
+  ~~~
 
 2.  When deployed to Azure, the API should read these settings from Environment Variables or ideally, from KeyVault
 
@@ -133,7 +152,7 @@ Indicates token type. This claim is the most accurate way for an API to determin
     "Instance": "https://login.microsoftonline.com/",
     "Domain": "https://portal.azure.com/",
     "ClientId": "Client ID from API App Registration",
-    "TenantId": "Tenant ID from APO App Registration"
+    "TenantId": "Tenant ID from API App Registration"
     "ClientSecret": "Client Secret from App Registrations",
     "CallbackPath": "/signin-oidc",
     "SignedOutCallbackPath": "/signout-oidc"
